@@ -1,0 +1,86 @@
+IoT Application Documentation
+Overview
+This IoT Application allows users to register devices, send data, and send commands to registered devices. It also provides functionality to view registered devices and log activities.
+
+
+File Structure
+The project includes the following files:
+app.js:
+This file contains the server-side logic implemented using Node.js and Express. It handles device registration, data reception, command sending, and device listing functionalities.
+The application uses a 'devices.json' file to store registered devices and a 'logs.txt' file to log activities.
+index.js:
+This file starts the Express server on the specified port (default is 3000). It imports the Express app from 'app.js'.
+index.html:
+This HTML file defines the structure of the user interface. It includes forms for registering devices, sending data, and sending commands. The UI also displays response messages and provides a button to show/hide registered devices.
+
+
+
+Usage
+
+Register Device:
+Enter Device ID and Type.
+Click the "Register" button.
+
+
+Send Data:
+Enter Device ID and Data.
+Click the "Send Data" button.
+
+
+Send Command:
+Enter Device ID and Command.
+Click the "Send Command" button.
+
+Show/Hide Registered Devices:
+Click the "Show/Hide Registered Devices" button to toggle the display of registered devices.
+
+
+API Endpoints
+
+Register Device:
+URL: /register
+Method: POST
+Request Body:
+{
+  "deviceId": "string",
+  "deviceType": "string"
+}
+
+
+Show Registered Devices:
+URL: /show
+Method: GET
+Response:
+[
+  {
+    "deviceId": "string",
+    "deviceType": "string"
+  },
+]
+
+
+Send Data:
+URL: /data
+Method: POST
+Request Body:
+{
+  "deviceId": "string",
+  "data": {}
+}
+
+
+Send Command:
+URL: /command
+Method: POST
+Request Body:
+
+{
+  "deviceId": "string",
+  "command": "string"
+}
+
+Response
+The response messages are displayed in the "Response" section of the UI. The response includes confirmation messages for device registration, data sending, and command sending.
+
+Log
+Activities, including device registrations, data receptions, and command sendings, are logged in the 'logs.txt' file with timestamps.

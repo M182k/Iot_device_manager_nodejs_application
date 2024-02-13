@@ -1,0 +1,82 @@
+[
+  {
+    "deviceId": "123",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "12",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "12333333333333333",
+    "deviceType": "Sensors"
+  },
+  {
+    "deviceId": "1233",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "12334",
+    "deviceType": "Sensors"
+  },
+  {
+    "deviceId": "100",
+    "deviceType": "Sensorssss"
+  },
+  {
+    "deviceId": "101",
+    "deviceType": "Camera"
+  },
+  {
+    "deviceId": "1011",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "123456789",
+    "deviceType": "Camera"
+  },
+  {
+    "deviceId": "8888",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "12344444",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "123333333333333",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "6666",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "112233",
+    "deviceType": "Sensor"
+  },
+  {
+    "deviceId": "12121212",
+    "deviceType": "Camera"
+  },
+  {
+    "deviceId": "121212121212",
+    "deviceType": "Sample"
+  },
+  {
+    "deviceId": "11111111111111",
+    "deviceType": "Check"
+  },
+  {
+    "deviceId": "789789",
+    "deviceType": "Data"
+  },
+  {
+    "deviceId": "11",
+    "deviceType": "Demo"
+  },
+  {
+    "deviceId": "1222",
+    "deviceType": "Sensor"
+  }
+]
