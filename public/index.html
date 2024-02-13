@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Application</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <h1>IoT Application</h1>
+
+    <!-- Register Device Section -->
+    <h2>Register Device</h2>
+    <form id="registerForm">
+        <label for="registerDeviceID">Device ID:</label>
+        <input type="text" id="registerDeviceID" name="deviceID" required>
+
+        <label for="registerDeviceType">Type:</label>
+        <input type="text" id="registerDeviceType" name="deviceType" required>
+
+        <button type="button" onclick="registerDevice()">Register</button>
+    </form>
+
+    <!-- Send Data Section-->
+    <h2>Send Data</h2>
+    <form id="dataForm">
+        <label for="sendDataDeviceID">Device ID:</label>
+        <input type="text" id="sendDataDeviceID" name="deviceID" required>
+
+        <label for="sendData">Data:</label>
+        <input type="text" id="sendData" name="data" required>
+
+        <button type="button" onclick="sendData()">Send Data</button>
+    </form>
+
+    <!-- Send Command Section-->
+    <h2>Send Command</h2>
+    <form id="commandForm">
+        <label for="sendCommandDeviceID">Device ID:</label>
+        <input type="text" id="sendCommandDeviceID" name="deviceID" required>
+
+        <label for="sendCommand">Command:</label>
+        <input type="text" id="sendCommand" name="command" required>
+
+        <button type="button" onclick="sendCommand()">Send Command</button>
+    </form>
+
+    <!-- Response Section -->
+    <h2>Response</h2>
+    <p id="response"></p>
+
+    <button class="registered-devices-button" onclick="toggleRegisteredDevices()">Show/Hide Registered Devices</button>
+    
+    <div id="registeredDevices">
+        <h2>Registered Devices</h2>
+        <ul id="deviceList"></ul>
+    </div>
+
+    <script>
+        // Function to register a new device
+        function registerDevice() {
+            const deviceId = document.getElementById('registerDeviceID').value;
+            const deviceType = document.getElementById('registerDeviceType').value;
+
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ deviceId, deviceType }),
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                const responseElement = document.getElementById('response');
+                responseElement.textContent = `Device registered - ID: ${deviceId}, Type: ${deviceType}`;
+                // Fetch and display registered devices after registering
+                showRegisteredDevices();
+            })
+            .catch(error => {
+                console.error('Error registering device:', error.message);
+            });
+        }
+
+        // Function to send data to a device
+        function sendData() {
+            const deviceId = document.getElementById('sendDataDeviceID').value;
+            const data = document.getElementById('sendData').value;
+
+            fetch('/data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ deviceId, data }),
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                const responseElement = document.getElementById('response');
+                responseElement.textContent = `Data sent - Device ID: ${deviceId}, Data: ${data}`;
+                // Fetch and display registered devices after sending data
+                showRegisteredDevices();
+            })
+            .catch(error => {
+                console.error('Error sending data:', error.message);
+            });
+        }
+
+        // Function to send a command to a device
+        function sendCommand() {
+            const deviceId = document.getElementById('sendCommandDeviceID').value;
+            const command = document.getElementById('sendCommand').value;
+
+            fetch('/command', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ deviceId, command }),
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                const responseElement = document.getElementById('response');
+                responseElement.textContent = `Command sent - Device ID: ${deviceId}, Command: ${command}`;
+            })
+            .catch(error => {
+                console.error('Error sending command:', error.message);
+            });
+        }
+
+        // Function to show registered devices
+        function showRegisteredDevices() {
+            fetch('/show')
+            .then(response => response.json())
+            .then(devices => {
+                const deviceList = document.getElementById('deviceList');
+                deviceList.innerHTML = '';
+
+                devices.forEach(device => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Device ID: ${device.deviceId}, Device Type: ${device.deviceType}`;
+                    deviceList.appendChild(listItem);
+                });
+
+                // Show the registered devices section
+                document.getElementById('registeredDevices').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error loading devices:', error.message);
+            });
+        }
+
+        // Function to toggle the visibility of registered devices
+        function toggleRegisteredDevices() {
+            const registeredDevices = document.getElementById('registeredDevices');
+            registeredDevices.style.display = (registeredDevices.style.display === 'none') ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
